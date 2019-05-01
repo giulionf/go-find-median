@@ -5,7 +5,7 @@ import (
 )
 
 func TestSimpleMedian(t *testing.T) {
-	testMedian(t, Iterate)
+	testMedian(t, RepeatedLinearSelection)
 }
 
 func TestSortedMedian(t *testing.T) {
@@ -13,19 +13,19 @@ func TestSortedMedian(t *testing.T) {
 }
 
 func TestDivideAndConquer(t *testing.T) {
-	testMedian(t, DivideAndConquer)
+	testMedian(t, QuickSelect)
 }
 
 func TestFast(t *testing.T) {
-	testMedian(t, Fast)
+	testMedian(t, MedianOfMedians)
 }
 
 func testMedian(t *testing.T, algorithm Algorithm) {
-	list1 := []float64 { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
-	list2 := []float64 { 9, 1, 8, 2, 7, 3, 6, 4, 5, 0, 10}
-	list3 := []float64 { 9, 1, 5, 3, 4, 2, 8, 7, 0, 6, 10}
-	list4 := []float64 { 10, 20, 30, 100, 200, 300, 1000, 100000}
-	list5 := []float64 { 10.1, 20.2, 30, 100.5, 200.3, 300.1, 1000.1123, 100000, 133123}
+	list1 := []int { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	list2 := []int { 9, 1, 8, 2, 7, 3, 6, 4, 5, 0, 10}
+	list3 := []int { 9, 1, 5, 3, 4, 2, 8, 7, 0, 6, 10}
+	list4 := []int { 10, 20, 30, 100, 200, 300, 1000, 100000}
+	list5 := []int { 10, 20, 30, 200, 300, 300, 1000, 100000, 133123}
 
 	median1 := FindMedian(algorithm, list1)
 	median2 := FindMedian(algorithm, list2)
@@ -45,7 +45,7 @@ func testMedian(t *testing.T, algorithm Algorithm) {
 		t.Error("Wrong Median: ", median4)
 	}
 
-	if median5 != 200.3 {
+	if median5 != 300 {
 		t.Error("Wrong Median: ", median5)
 	}
 }

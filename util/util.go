@@ -19,3 +19,14 @@ func GenerateRandomList(length int) []int {
 
 	return list
 }
+
+func GenerateIncrementingList(length int) []int {
+
+	// Set up a list of random numbers
+	var list []int
+	for i := 0; i < length; i++ {
+		list = append(list, i)
+	}
+
+	return list
+}

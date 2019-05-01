@@ -1,8 +1,8 @@
 package algorithms
 
 import (
-	"median-finding/algorithms/divideanconquer"
-	"median-finding/algorithms/fast"
+	"median-finding/algorithms/quickselect"
+	"median-finding/algorithms/medianofmedians"
 	"median-finding/algorithms/iterate"
 	"median-finding/algorithms/sortfirst"
 )
@@ -10,26 +10,26 @@ import (
 type Algorithm int
 
 const (
-	Iterate Algorithm = 1 + iota
+	RepeatedLinearSelection Algorithm = 1 + iota
 	SortFirst
-	DivideAndConquer
-	Fast
+	QuickSelect
+	MedianOfMedians
 )
 
 func FindMedian(algorithm Algorithm, list []int) int {
 	switch algorithm {
 
-	case Iterate:
+	case RepeatedLinearSelection:
 		return iterate.FindMedian(list)
 
 	case SortFirst:
 		return sortfirst.FindMedian(list)
 
-	case DivideAndConquer:
-		return divideanconquer.FindMedian(list)
+	case QuickSelect:
+		return quickselect.FindMedian(list)
 
-	case Fast:
-		return fast.FindMedian(list)
+	case MedianOfMedians:
+		return medianofmedians.FindMedian(list)
 
 	default:
 		return iterate.FindMedian(list)
