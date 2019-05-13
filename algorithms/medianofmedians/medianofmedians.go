@@ -19,13 +19,14 @@ func findKthSmallestElement(list []int, k int) int {
 		return list[0]
 	}
 
+	// Slice the list into groups of 5
 	sliceCount := (len(list) + 4) / 5
 	medians := make([]int, sliceCount)
 
 	for i := 0; i < len(list); i+=5 {
 		if i + 5 < len(list) {
 			slice := list[i:i+5]
-			fastSort5(slice)
+			insertionSort(slice)
 			medians[i/5] = slice[2]
 		} else {
 			slice := list[i:]
@@ -33,8 +34,11 @@ func findKthSmallestElement(list []int, k int) int {
 			medians[i/5] = slice[len(slice) / 2]
 		}
 	}
+
+	// Use the median of medians as pivot to ensure linear complexity
 	pivot := findKthSmallestElement(medians, sliceCount/2)
 
+	// Partition into smaller (left) and bigger (right) than the pivot
 	left := make([]int, 0)
 	right := make([]int, 0)
 
@@ -46,6 +50,7 @@ func findKthSmallestElement(list []int, k int) int {
 		}
 	}
 
+	// Either recurse or return the median
 	if k < len(left) {
 		return findKthSmallestElement(left, k)
 	} else if k > len(left) {
@@ -55,17 +60,15 @@ func findKthSmallestElement(list []int, k int) int {
 	}
 }
 
-func fastSort5(list []int) {
-	for j0 := 0; j0 < 3; j0++ {
-		jmin := j0
-		for j := j0+1; j < 5; j++ {
-			if list[j] < list[jmin] {
-				jmin = j
+func insertionSort(items []int) {
+	var n = len(items)
+	for i := 1; i < n; i++ {
+		j := i
+		for j > 0 {
+			if items[j-1] > items[j] {
+				items[j-1], items[j] = items[j], items[j-1]
 			}
+			j = j - 1
 		}
-
-		tmp := list[j0]
-		list[j0] = list[jmin]
-		list[jmin] = tmp
 	}
 }
