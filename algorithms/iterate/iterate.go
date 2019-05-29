@@ -6,7 +6,7 @@ import (
 
 func FindMedian(list []int) int {
 	// Calculate the index of the median
-	medianIndex := int(math.Ceil(float64(len(list)) / 2) - 1)
+	medianIndex := int(math.Floor(float64(len(list)) - 1.0) / 2)
 
 	// Copy the list to leave the original intact
 	copyList := make([]int, len(list))
@@ -35,7 +35,6 @@ func removeSmallestElement(list []int) ([]int, int) {
 
 	// Remove it from the array
 	list[indexOfSmallestNumber] = list[len(list)-1]
-	list[len(list)-1] = 0
 	list = list[:len(list)-1]
 
 	return list, smallestElement

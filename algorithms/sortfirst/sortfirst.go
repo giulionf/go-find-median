@@ -9,7 +9,7 @@ import (
 func FindMedian(list []int) int {
 
 	// Calculate the index of the median
-	medianIndex := int(math.Ceil(float64(len(list)) / 2) - 1)
+	medianIndex := int(math.Floor(float64(len(list)) - 1.0) / 2)
 
 	// Deep copy the list to preserve the original
 	sortedList := make([]int, len(list))

@@ -7,7 +7,7 @@ import (
 
 func FindMedian(list []int) int {
 	// Calculate the index of the median
-	medianIndex := int(math.Ceil(float64(len(list)) / 2) - 1)
+	medianIndex := int(math.Floor(float64(len(list)) - 1.0) / 2)
 
 	// Start the recursion
 	return findKthSmallestElement(list, medianIndex)

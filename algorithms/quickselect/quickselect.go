@@ -8,21 +8,17 @@ import (
 
 func FindMedian(list []int) int {
 	// Calculate the index of the median
-	medianIndex := int(math.Ceil(float64(len(list)) / 2) - 1)
+	medianIndex := int(math.Floor(float64(len(list)) - 1.0) / 2)
 
 	// Start the recursion
 	return findKthSmallestElement(list, medianIndex)
 }
 
 func findKthSmallestElement(list []int, k int) int {
-	listLength := len(list)
-	if listLength == 1 {
-		return list[0]
-	}
-
 	// Pick Random Pivot
 	rand.Seed(time.Now().Unix())
 	pivot := list[rand.Intn(len(list))]
+	listLength := len(list)
 
 	// Partition into smaller (left) and bigger (right) than the pivot
 	left := make([]int, 0)
